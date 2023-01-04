@@ -44,12 +44,12 @@ class AgendaController extends Controller
                 ->select('agenda.*', 'ruangan.nama as nama_ruangan', 'users.name as pic_name')
                 //->where('agenda.pic', '=', Auth::user()->id)
                 //->select('agenda.*', 'ruangan.nama as nama_ruangan', 'agenda_user.user_id')
-                //->groupBy( 'agenda_user.user_id','agenda.id', 'agenda.nama_agenda', 'agenda.tanggal', 'agenda.waktu_mulai', 
+                //->groupBy( 'agenda_user.user_id','agenda.id', 'agenda.nama_agenda', 'agenda.tanggal', 'agenda.waktu_mulai',
                 //   'agenda.waktu_selesai', 'agenda.ruangan_id', 'agenda.status', 'agenda.keterangan',
                 //    'agenda.pic', 'agenda.notulen', 'agenda.updated_at', 'agenda.created_at', 'ruangan.nama')
                 ->whereBetween('agenda.tanggal', [$tgl1, $tgl2])
                 ->orderBy('agenda.status', 'asc')
-                ->orderBy('tanggal', 'desc')
+                ->orderBy('tanggal', 'asc')
                 ->get();
         } else {
             $query = DB::table('agenda')
@@ -59,7 +59,7 @@ class AgendaController extends Controller
                 ->where('agenda.pic', '=', Auth::user()->id)
                 ->whereBetween('agenda.tanggal', [$tgl1, $tgl2])
                 ->orderBy('agenda.status', 'asc')
-                ->orderBy('tanggal', 'desc')
+                ->orderBy('tanggal', 'asc')
                 ->get();
         }
 
@@ -541,7 +541,7 @@ class AgendaController extends Controller
             $eselon = User::where('username', '=', $agenda->nip_pengundang)->first();
             $tahun = new DateTime();
             $tahun = $tahun->format('Y');
-            $undangan = "UM.02.09/XLIV." . $eselon->pegawai->eselon . "/" . $request->no_undangan . "/" . $tahun;
+            $undangan = "UM.02.08/XLVIII." . $eselon->pegawai->eselon . "/" . $request->no_undangan . "/" . $tahun;
 
             //dd($undangan);
             $agenda->no_undangan = $undangan;

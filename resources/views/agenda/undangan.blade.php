@@ -164,8 +164,8 @@
                         <form method="POST" action="/notulen/save/{{ $agenda->id }}">
                             @csrf
                             <textarea id="editor1" name="notulen_ol" rows="10" cols="80">
-                                                                                                                                                                                                                                                                                                                                                                                                                                            {{ $agenda->notulen_ol }}
-                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                {{ $agenda->notulen_ol }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
 
@@ -416,7 +416,7 @@
                                     <div class="form-group">
                                         <label>No Undangan (Optional)</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">UM.02.09/XLIV.
+                                            <span class="input-group-addon">UM.02.08/XLVIII.
 
                                                 {{ $eselon->pegawai->eselon }}/
 
@@ -428,8 +428,7 @@
                                 @endif
                                 <div class="form-group">
                                     <label>Catatan</label>
-                                    <textarea class="form-control" rows="3" name='catatan'
-                                        placeholder="Catatan"></textarea>
+                                    <textarea class="form-control" rows="3" name='catatan' placeholder="Catatan"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default pull-left"
