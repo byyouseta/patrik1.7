@@ -581,19 +581,11 @@ class AgendaController extends Controller
             ->orderBy('agenda_user.id', 'asc')
             ->get();
 
-        // $tamu = Tamu::where('agenda_id',$id)
-        //         ->orderBy('created_at', 'asc')
-        //         ->get();
-        // return data ke view
 
         $pdf = PDF::loadview('agenda.undangan_pdf', ['agenda' => $agenda, 'peserta' => $hadir]);
 
         // (Optional) Setup the paper size and orientation
-        $pdf->setPaper('folio', 'potraid');
-        // $pdf->setOptions(['isRemoteEnabled' => true]);
-
-        // Render the HTML as PDF
-        //$pdf->render();
+        $pdf->setPaper('A4', 'potraid');
 
         return $pdf->stream();
     }
