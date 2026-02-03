@@ -19,7 +19,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'password', 'level', 'unit_id',
+        'name',
+        'email',
+        'username',
+        'password',
+        'level',
+        'unit_id',
     ];
 
     /**
@@ -28,7 +33,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     public function pegawai()
@@ -49,5 +55,10 @@ class User extends Authenticatable
     public function picagenda()
     {
         return $this->hasMany('App\Agenda', 'id', 'pic');
+    }
+
+    public function picTimeline()
+    {
+        return $this->hasMany('App\AgendaTimeline', 'id', 'pic');
     }
 }

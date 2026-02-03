@@ -35,7 +35,6 @@
             font-size: 11px;
             line-height: 35px;
         }
-
     </style>
 </head>
 
@@ -44,7 +43,7 @@
         <table class="table table-borderless">
             <thead>
                 <tr>
-                    <th class="align-middle"><img src={{ public_path('adminlte/dist/img/LogoKemenkes.png') }}
+                    {{-- <th class="align-middle"><img src={{ public_path('adminlte/dist/img/LogoKemenkes.png') }}
                             alt="Logo Kemenkes" width="80" height="80"></th>
                     <th class="col-10 text-center align-middle">
                         <h6>DIREKTORAL JENDERAL PELAYANAN KESEHATAN</h6>
@@ -53,7 +52,11 @@
 
                     </th>
                     <th class="align-middle"><img src={{ public_path('adminlte/dist/img/Logo.png') }} alt="Logo RSUP"
-                            width="80" height="80" /></th>
+                            width="80" height="80" /></th> --}}
+                    <th class="align-middle pl-0">
+                        <center><img src={{ public_path('adminlte/dist/img/KopSurat2.jpg') }} alt="Kop Surat"
+                                width="650px" /></center>
+                    </th>
                 </tr>
             </thead>
         </table>
@@ -76,9 +79,8 @@
                 margin-top: -1em;
                 margin-bottom: 0em;
             }
-
         </style>
-        <hr class='new4'>
+        {{-- <hr class='new4'> --}}
 
         <table class="table table-borderless">
             <tbody>

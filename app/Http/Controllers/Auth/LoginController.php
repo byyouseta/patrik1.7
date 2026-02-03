@@ -38,7 +38,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function field(Request $request){
+    public function field(Request $request)
+    {
         $email = $this->username();
         return filter_var($request->get($email), FILTER_VALIDATE_EMAIL) ? $email : 'username';
     }
@@ -54,15 +55,16 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         $field = $this->field($request);
-        
+
         $message = [
-            "{$this->username()}.exists"=>
-                'The account you are trying to login is not registered or it has been disabled.'
+            "{$this->username()}.exists" =>
+            'The account you are trying to login is not registered or it has been disabled.'
         ];
 
         $request->validate([
             $this->username() => "required|string|exists:users,{$field}",
             'password' => 'required|string',
+            'g-recaptcha-response' => 'required|captcha',
         ], $message);
     }
 

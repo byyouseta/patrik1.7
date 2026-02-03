@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \Crypt;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -16,6 +15,7 @@ use App\User;
 use App\Ruangan;
 use App\Pegawai;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use PDF;
 
@@ -275,6 +275,7 @@ class AgendaController extends Controller
         ]);
     }
 
+
     public function tambahpeserta($id, Request $request)
     {
         $this->validate($request, [
@@ -351,7 +352,10 @@ class AgendaController extends Controller
             //return view('undangan', ['agenda' => $query2]);
             $id = Crypt::encrypt($id);
             return view('undangan', [
-                'id' => $id, 'agenda' => $agenda, 'pegawai' => $pegawai, 'presensi' => $peserta,
+                'id' => $id,
+                'agenda' => $agenda,
+                'pegawai' => $pegawai,
+                'presensi' => $peserta,
                 'cari' => $query2
             ]);
         } else {
@@ -389,6 +393,26 @@ class AgendaController extends Controller
         $id = Crypt::encrypt($id);
         return redirect("/agenda/undangan/$id");
     }
+
+    public function delete_notulen($id)
+    {
+        $id = Crypt::decrypt($id);
+
+        $agenda = Agenda::find($id);
+
+        $deleteFile = 'notulen_rapat/' . $agenda->notulen;
+        if (file_exists($deleteFile)) {
+            unlink($deleteFile);
+        }
+        $agenda->notulen = null;
+        $agenda->save();
+
+        Session::flash('sukses', 'Notulen berhasil dihapus');
+
+        $id = Crypt::encrypt($id);
+        return redirect("/agenda/undangan/$id");
+    }
+
 
     public function daftarhadir($id, Request $request)
     {
@@ -541,7 +565,7 @@ class AgendaController extends Controller
             $eselon = User::where('username', '=', $agenda->nip_pengundang)->first();
             $tahun = new DateTime();
             $tahun = $tahun->format('Y');
-            $undangan = "UM.02.08/XLVIII." . $eselon->pegawai->eselon . "/" . $request->no_undangan . "/" . $tahun;
+            $undangan = "UM.01.01/D.XXXI/" . $request->no_undangan . "/" . $tahun;
 
             //dd($undangan);
             $agenda->no_undangan = $undangan;

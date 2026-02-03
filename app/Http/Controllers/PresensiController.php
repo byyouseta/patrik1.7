@@ -36,6 +36,8 @@ class PresensiController extends Controller
     // }
     public function index()
     {
+        session()->put('halaman', 'presensi');
+
         $query = DB::table('agenda')
             ->join('agenda_user', 'agenda_user.agenda_id', '=', 'agenda.id')
             ->join('users', 'agenda.pic', '=', 'users.id')

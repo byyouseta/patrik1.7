@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('head')
     <!-- DataTables -->
-    <link rel="stylesheet"
-        href="{{ asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 @endsection
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
@@ -72,6 +71,8 @@
                                     {{-- {{$agenda->notulen}} --}}
                                     <a href="/notulen/view/{{ $agenda->notulen }} " target="_blank"
                                         class="label label-success">Lihat File</a>
+                                    <a href="/notulen/{{ Crypt::encrypt($agenda->id) }}/delete"
+                                        class="label label-danger">Hapus Notulen</a>
                                 @else
                                     <span class="label label-warning">belum ada Notulen</span>
                                 @endif
@@ -144,7 +145,9 @@
                     </table>
                 </div>
             </div>
-            @if (($agenda->status != 'Pengajuan' or $agenda->status != 'Ditolak') and (Auth::user()->level == 'admin' or Auth::user()->id == $agenda->pic))
+            @if (
+                ($agenda->status != 'Pengajuan' or $agenda->status != 'Ditolak') and
+                    (Auth::user()->level == 'admin' or Auth::user()->id == $agenda->pic))
                 <div class="box box-info collapsed-box">
                     <div class="box-header">
                         <h3 class="box-title">PATRIK Notulen
@@ -177,7 +180,9 @@
             <!-- /.box -->
 
 
-            @if (($agenda->status != 'Pengajuan' or $agenda->status != 'Ditolak') and (Auth::user()->level == 'admin' or Auth::user()->id == $agenda->pic))
+            @if (
+                ($agenda->status != 'Pengajuan' or $agenda->status != 'Ditolak') and
+                    (Auth::user()->level == 'admin' or Auth::user()->id == $agenda->pic))
                 <div class="box box-success">
                     <div class="box-body">
                         <div class="box-header table-hover">
@@ -350,11 +355,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if (($now < $agenda->tanggal or $user->pivot->presensi != 'sudah') and (Auth::user()->level == 'admin' or Auth::user()->id == $agenda->pic))
+                                        @if (
+                                            ($now < $agenda->tanggal or $user->pivot->presensi != 'sudah') and
+                                                (Auth::user()->level == 'admin' or Auth::user()->id == $agenda->pic))
                                             <div class="btn-group">
                                                 <a href="/undangan/{{ $id }}/hapus/{{ Crypt::encrypt($user->id) }}"
                                                     class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                                    data-placement="bottom" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    data-placement="bottom" title="Hapus"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                             <div class="btn-group">
                                                 <a href="/presensi/{{ $id }}/email/{{ Crypt::encrypt($user->id) }}"
@@ -366,7 +374,8 @@
                                             <div class="btn-group">
                                                 <a href="/undangan/{{ $id }}/hapus/{{ Crypt::encrypt($user->id) }}"
                                                     class="btn btn-danger btn-sm disabled" data-toggle="tooltip"
-                                                    data-placement="bottom" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    data-placement="bottom" title="Hapus"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                             <div class="btn-group">
                                                 <a href="/presensi/{{ $id }}/email/{{ Crypt::encrypt($user->id) }}"
@@ -399,7 +408,8 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Diverifikasi Oleh</label>
-                                    <input type='hidden' class="form-control" name='id' value='{{ $agenda->id }}' />
+                                    <input type='hidden' class="form-control" name='id'
+                                        value='{{ $agenda->id }}' />
                                     <input type='text' class="form-control" name='verifikator'
                                         value='{{ Auth::user()->name }}' disabled />
                                 </div>
@@ -416,10 +426,7 @@
                                     <div class="form-group">
                                         <label>No Undangan (Optional)</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">UM.02.08/XLVIII.
-
-                                                {{ $eselon->pegawai->eselon }}/
-
+                                            <span class="input-group-addon">UM.01.01/D.XXXI/
                                             </span>
                                             <input type='text' class="form-control" name='no_undangan' />
                                             <span class="input-group-addon">/{{ $tahun }}</span>

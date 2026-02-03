@@ -7,43 +7,47 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="adminlte/plugins/bootstrap413/dist/css/bootstrap.min.css"> --}}
     <style>
+        @page {
+            margin-top: 150px;
+            /* >= tinggi header */
+            margin-bottom: 120px;
+        }
+
         header {
             position: fixed;
-            top: -60px;
-            left: 0px;
-            right: 0px;
-            height: 50px;
-
-            /** Extra personal styles **/
-            /* background-color: #03a9f4; */
+            top: -150px;
+            /* HARUS sama dengan margin-top */
+            left: 0;
+            right: 0;
+            height: 180px;
             color: black;
-            text-align: right;
-            line-height: 12px;
+            text-align: center;
         }
 
         footer {
             position: fixed;
-            bottom: -60px;
-            left: 0px;
-            right: 30px;
-            height: 100px;
-
-            /** Extra personal styles **/
-            /* background-color: #03a9f4; */
-            color: grey;
-            text-align: right;
+            bottom: -120px;
+            /* HARUS sama dengan margin-bottom */
+            left: 0;
+            right: 0;
+            height: 120px;
             font-size: 11px;
-            line-height: 35px;
+            text-align: right;
+        }
+
+        .no-break {
+            page-break-inside: avoid !important;
+            break-inside: avoid;
         }
     </style>
-</head>
 
-<body>
-    <main>
-        <table class="table table-borderless" style="margin-bottom : 0px;padding-bottom:0px;">
-            <thead>
-                <tr>
-                    <th class="align-middle"><img src="adminlte/dist/img/LogoKemenkes.png" alt="Logo Kemenkes"
+
+</head>
+<header>
+    <table class="table table-borderless" style="margin-bottom : 0px;padding-bottom:0px;">
+        <thead>
+            <tr>
+                {{-- <th class="align-middle"><img src="adminlte/dist/img/LogoKemenkes.png" alt="Logo Kemenkes"
                             width="80" height="80"></th>
                     <td class="col-10 text-center align-middle" style="line-height: 1.2;">
                         <strong>
@@ -59,10 +63,17 @@
                     </td>
                     <th class="align-middle"><img src="adminlte/dist/img/Logo.png" alt="Logo RSUP" width="80"
                             height="80">
-                    </th>
-                </tr>
-            </thead>
-        </table>
+                    </th> --}}
+                <th class="align-middle pl-0">
+                    <center><img src="https://i.imgur.com/eddLDkB.png" alt="Kop Surat" width="650px" /></center>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</header>
+
+<body>
+    <main>
         <?php
         $arrhari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         $hari = new DateTime($agenda->tanggal);
@@ -92,7 +103,7 @@
             }
         </style>
 
-        <hr class='new4' />
+        {{-- <hr class='new4' /> --}}
         @php
             $jmlundangan = $peserta->count();
             $urutan2 = ceil($jmlundangan / 2);
@@ -150,7 +161,7 @@
         @php
             $keterangan = explode(PHP_EOL, $agenda->keterangan);
         @endphp
-        <table class="table table-borderless table-sm" style="margin-top:1px;">
+        <table class="table table-borderless table-sm no-break" style="margin-top:1px;">
             <tbody>
                 <tr>
                     <td colspan='3' style="padding-top: 1px; padding-bottom:1px; padding-left:40px;">Di RSUP
@@ -228,8 +239,6 @@
                     <td style="width: 50%"></td>
                     <th class="text-center" style="width: 50%; padding-right:40px">{{ $agenda->pengundang }}</th>
                 </tr>
-
-
             </tbody>
 
         </table>
@@ -238,13 +247,31 @@
         {{-- <div>
             <img src="adminlte/dist/img/kars_paripurna.png" alt="Logo Kemenkes" width="50" height="50">
         </div> --}}
-        <table class="table table-sm table-borderless" style="margin-bottom:0px;">
+        <table class="table table-sm table-borderless" style="margin-bottom:100px;">
             <tr>
-                <td style="color: grey; padding-top:25px; padding-bottom:0px; font-size:11px">
+                {{-- <td style="color: grey; padding-top:25px; padding-bottom:0px; font-size:11px">
                     Dicetak dari PATRIK (Rapat Elektronik) pada {{ \Carbon\Carbon::now()->format('d/m/Y h:i:s') }}
+                </td> --}}
+                <td
+                    style="color: black; padding-top:0px; padding-bottom:0px; font-size:11px; text-align:center; border:1px solid black">
+                    {{-- Dicetak dari PATRIK (Rapat Elektronik) pada {{ \Carbon\Carbon::now()->format('d/m/Y h:i:s') }} --}}
+                    Kementerian Kesehatan tidak menerima suap dan/ atau gratifikasi dalam bentuk apapun. Jika terdapat
+                    potensi suap atau gratifikasi silahkan laporkan melalui HALO KEMENKES 1500567 dan
+                    <a href='https://wbs.kemkes.go.id'>https://wbs.kemkes.go.id</a>. Untuk verifikasi keaslian
+                    tandatangan elektronik, silahkan unggah dokumen
+                    pada laman <a href='https://tte.kominfo.go.id/verifyPDF'>https://tte.kominfo.go.id/verifyPDF</a>
                 </td>
-                <td class="text-right">
-                    <img src="adminlte/dist/img/kars_paripurna.png" alt="Logo Kemenkes" width="50" height="50">
+                <td class="text-right" style='width:20%'>
+                    <img src="https://p.kindpng.com/picc/s/627-6275189_komisi-akreditasi-rumah-sakit-hd-png-download.png"
+                        alt="Logo KARS" width="50" height="50">
+                    <img src="https://www.polibatam.ac.id/wp-content/uploads/2024/02/Logo-BLU-Speed.png"
+                        alt="Logo Blu Speed" width="50" height="50">
+                </td>
+            </tr>
+            <tr>
+                <td style="color: grey; padding-top:20px; padding-bottom:0px; font-size:11px; text-align:right;"
+                    colspan='2'>
+                    Dicetak dari PATRIK (Rapat Elektronik) pada {{ \Carbon\Carbon::now()->format('d/m/Y h:i:s') }}
                 </td>
             </tr>
         </table>

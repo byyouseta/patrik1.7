@@ -29,6 +29,9 @@
         <!-- Google Font -->
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
     </head>
 
     <body class="hold-transition login-page bg">
@@ -73,14 +76,11 @@
                                 placeholder="NIP / alamat email" value="{{ old('email') }}">
                         </div>
                         @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback text-danger" role="alert">
                                 <strong>{{ $errors->first('email') }}</strong>
                             </span>
                         @endif
                     </div>
-
-
-
                     <div class="form-group has-feedback">
                         <div class="input-group">
                             <span class="input-group-addon" id="mybutton" onclick="change()"><i
@@ -97,13 +97,19 @@
                             </span>
                         @endif
                     </div>
-
-
-
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-xs-12">
-
+                            <div class="form-group align-center">
+                                <label for="captcha">Captcha</label>
+                                {!! NoCaptcha::renderJs() !!}
+                                <div style="width: 300px; margin: 0 auto;"> <!-- Atur lebar di sini -->
+                                    {!! NoCaptcha::display() !!}
+                                </div>
+                                <span class="invalid-feedback text-danger" role="alert">
+                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                </span>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
                             <h5 class="text-center"><strong>atau</strong></h5>
                             <a href="/tamu" class="btn btn-warning btn-block btn-flat">Presensi sebagai Tamu</a>
